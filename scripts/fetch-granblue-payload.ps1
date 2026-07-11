@@ -9,8 +9,17 @@ $root = Split-Path $PSScriptRoot -Parent
 $payload = Join-Path $root "payload\granblue-relink"
 New-Item -ItemType Directory -Force $payload | Out-Null
 
-# The GBFRelinkFix mod repo (sibling of this solution).
-$modRepo = Join-Path (Split-Path $root -Parent) "UWMod\GBFRelinkFix"
+# The GBFRelinkFix mod repo lives under the gbflinkUW workspace root as UWMod\GBFRelinkFix.
+# Walk up from this solution's root looking for it, since the solution's own nesting
+# depth (gbflinkUW\UWPDVMod vs gbflinkUW\UWPDVMod\UWPDVMod) has moved before.
+$modRepo = $null
+$probe = $root
+for ($i = 0; $i -lt 4; $i++) {
+    $candidate = Join-Path $probe "UWMod\GBFRelinkFix"
+    if (Test-Path $candidate) { $modRepo = $candidate; break }
+    $probe = Split-Path $probe -Parent
+}
+if (-not $modRepo) { throw "Could not find the UWMod\GBFRelinkFix mod repo above $root" }
 
 $asi = Join-Path $modRepo "build\windows\x64\release\GBFRelinkFix.asi"
 if (-not (Test-Path $asi)) { throw "Build the mod first (xmake in $modRepo): $asi not found" }
