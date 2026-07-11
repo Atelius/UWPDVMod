@@ -106,7 +106,8 @@ public sealed class GranblueRelinkProfile : IModProfile
             {
                 new() { Section = "Shadow Quality", Key = "Enabled", Kind = ControlKind.Bool, Default = "false",
                     Label = "Override shadow quality",
-                    Tooltip = "Override shadow map resolution. Higher = sharper shadows, more VRAM." },
+                    Tooltip = "Override shadow map resolution. Higher = sharper shadows, more VRAM.\n" +
+                              "WARNING: currently unsafe on the Endless Ragnarok (2.0.2) build - crashes the game on launch. Leave disabled." },
                 new() { Section = "Shadow Quality", Key = "Value", Kind = ControlKind.Enum, Default = "4096",
                     Label = "Shadow resolution",
                     EnabledWhenSection = "Shadow Quality", EnabledWhenKey = "Enabled",
@@ -188,14 +189,9 @@ public sealed class GranblueRelinkProfile : IModProfile
         double vramGb = hw.VramGb;
         if (vramGb >= 12)
         {
-            recs.Add(new("Shadow Quality", "Enabled", "true", $"{vramGb:0.#} GB VRAM can afford high-res shadows"));
-            recs.Add(new("Shadow Quality", "Value", "4096", "Double the game's ultra shadow resolution"));
+            // Shadow Quality is intentionally NOT recommended: its signature is unsafe on
+            // the Endless Ragnarok (2.0.2) build (corrupts memory, crashes on launch).
             recs.Add(new("Level of Detail", "Multiplier", "1.5", "Reduce object pop-in on a high-end GPU"));
-        }
-        else if (vramGb >= 8)
-        {
-            recs.Add(new("Shadow Quality", "Enabled", "true", $"{vramGb:0.#} GB VRAM"));
-            recs.Add(new("Shadow Quality", "Value", "2048", "Matches the game's ultra preset"));
         }
 
         return recs;
