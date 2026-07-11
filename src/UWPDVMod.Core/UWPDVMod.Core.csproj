@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>UWPDVMod.Core</RootNamespace>
+    <AssemblyName>UWPDVMod.Core</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="9.0.0" />
+  </ItemGroup>
+
+  <!-- Embed the per-profile mod payload so the published app stays a single file.
+       Conditional: the project still builds when the payload folder is absent
+       (run scripts/fetch-granblue-payload.ps1 to populate it). -->
+  <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\..\..\payload\granblue-relink')">
+    <EmbeddedResource Include="..\..\payload\granblue-relink\*">
+      <Link>payload\granblue-relink\%(Filename)%(Extension)</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

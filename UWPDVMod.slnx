@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/UWPDVMod.App/UWPDVMod.App.csproj" />
+    <Project Path="src/UWPDVMod.Core/UWPDVMod.Core.csproj" />
+  </Folder>
+</Solution>
