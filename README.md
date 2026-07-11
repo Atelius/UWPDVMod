@@ -5,7 +5,9 @@ through a friendly UI instead of hand-editing config files. The entire interface
 from data-only **mod profiles**, so supporting a new game means adding one profile — the engine
 and UI never change.
 
+### [⬇ Download the latest UWPDVMod.exe](https://github.com/Atelius/UWPDVMod/releases/latest)
 
+No installer, no .NET required — just download and double-click.
 
 ![UWPDVMod screenshot](docs/screenshot.png)
 
@@ -95,11 +97,9 @@ No UI code changes required.
 
 ## Credits
 
-Ships today with a single profile: **Granblue Fantasy: Relink** (the
-[GBFRelinkFix](https://codeberg.org/Lyall/GBFRelinkFix) mod).
-
-The Granblue profile drives the **GBFRelinkFix** mod by Lyall and contributors. This tool only
-edits that mod's settings and manages its files; it does not modify the game itself.
+Ships today with a single profile: **Granblue Fantasy: Relink**, driving the
+[GBFRelinkFix](https://codeberg.org/Lyall/GBFRelinkFix) mod by Lyall and contributors. This tool
+only edits that mod's settings and manages its files; it does not modify the game itself.
 
 
 
